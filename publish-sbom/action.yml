@@ -19,6 +19,10 @@ inputs:
     required: false
     default: ${{ github.token }}
 
-runs:
+  github-url:
+    required: false
+    description: >
+      GitHub API base URL. Useful for GitHub Enterprise Server (GHES) instances.
+      Defaults to the GITHUB_API_URL environment variable, or https://api.github.com.
   using: "node24"
   main: "../dist/index.cjs"

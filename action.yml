@@ -77,6 +77,18 @@ inputs:
     required: false
     description: "Configuration file to use"
 
+  github-url:
+    required: false
+    description: >
+      GitHub API base URL. Useful for GitHub Enterprise Server (GHES) instances.
+      Defaults to the GITHUB_API_URL environment variable, or https://api.github.com.
+
+  syft-path:
+    required: false
+    description: >
+      Path to a pre-installed Syft binary. When specified, the action will skip
+      downloading Syft from GitHub. Useful for air-gapped environments.
+
 runs:
   using: "node24"
   main: "dist/index.cjs"

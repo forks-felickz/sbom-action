@@ -96422,7 +96422,9 @@ var GithubClient = class {
   }
 };
 function getClient2(repo2, githubToken) {
+  const baseUrl2 = getInput("github-url") || process.env.GITHUB_API_URL || "https://api.github.com";
   const octokit = getOctokit(githubToken, {
+    baseUrl: baseUrl2,
     throttle: {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -96633,6 +96635,11 @@ async function downloadSyft() {
   return import_path4.default.join(syftBinaryPath, name) + exeSuffix;
 }
 async function getSyftCommand() {
+  const syftPathInput = getInput("syft-path");
+  if (syftPathInput) {
+    info(`Using user-provided Syft path: '${syftPathInput}'`);
+    return syftPathInput;
+  }
   const name = SYFT_BINARY_NAME + exeSuffix;
   const version3 = SYFT_VERSION;
   const sourceSyft = await downloadSyftFromZip(version3);

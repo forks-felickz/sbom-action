@@ -245,6 +245,12 @@ export async function downloadSyft(): Promise<string> {
  * Gets the Syft command to run via exec
  */
 export async function getSyftCommand(): Promise<string> {
+  const syftPathInput = core.getInput("syft-path");
+  if (syftPathInput) {
+    core.info(`Using user-provided Syft path: '${syftPathInput}'`);
+    return syftPathInput;
+  }
+
   const name = SYFT_BINARY_NAME + exeSuffix;
   const version = SYFT_VERSION;
 

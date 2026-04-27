@@ -14,6 +14,12 @@ inputs:
     required: false
     description: "The version of Syft to download"
 
+  syft-path:
+    required: false
+    description: >
+      Path to a pre-installed Syft binary. When specified, the action will skip
+      downloading Syft from GitHub. Useful for air-gapped environments.
+
 outputs:
   cmd:
     description: "A reference to the Syft command"

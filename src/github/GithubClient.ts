@@ -449,7 +449,12 @@ export function getClient(repo: GithubRepo, githubToken: string): GithubClient {
   // The YML workflow will need to set myToken with the GitHub Secret Token
   // github-token: ${{ secrets.GITHUB_TOKEN }}
   // https://help.github.com/en/actions/automating-your-workflow-with-github-actions/authenticating-with-the-github_token#about-the-github_token-secret
+  const baseUrl =
+    core.getInput("github-url") ||
+    process.env.GITHUB_API_URL ||
+    "https://api.github.com";
   const octokit = github.getOctokit(githubToken, {
+    baseUrl,
     throttle: {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

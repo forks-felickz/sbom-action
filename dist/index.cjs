@@ -96637,6 +96637,9 @@ async function downloadSyft() {
 async function getSyftCommand() {
   const syftPathInput = getInput("syft-path");
   if (syftPathInput) {
+    if (!fs11.existsSync(syftPathInput)) {
+      throw new Error(`Provided syft-path does not exist: '${syftPathInput}'`);
+    }
     info(`Using user-provided Syft path: '${syftPathInput}'`);
     return syftPathInput;
   }

@@ -247,6 +247,9 @@ export async function downloadSyft(): Promise<string> {
 export async function getSyftCommand(): Promise<string> {
   const syftPathInput = core.getInput("syft-path");
   if (syftPathInput) {
+    if (!fs.existsSync(syftPathInput)) {
+      throw new Error(`Provided syft-path does not exist: '${syftPathInput}'`);
+    }
     core.info(`Using user-provided Syft path: '${syftPathInput}'`);
     return syftPathInput;
   }
